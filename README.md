@@ -2,6 +2,14 @@
 
 A modern RESTful API for task management built with FastAPI, SQLModel, and Pydantic.
 
+## � Archuitecture Diagrams
+
+### High-Level Design (HLD)
+![High-Level Design](docs/HLD_dig.png)
+
+### Request-Response Flow
+![Request-Response Flow](docs/REQ_RES.png)
+
 ## 🚀 Features
 
 - **Task Management**: Complete CRUD operations with status tracking
