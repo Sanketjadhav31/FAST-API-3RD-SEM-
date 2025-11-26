@@ -1,11 +1,7 @@
-from pydantic import BaseModel, Field
-from typing import Optional, List, TYPE_CHECKING
+from pydantic import BaseModel, Field, ConfigDict
+from typing import Optional, List
 from datetime import datetime
 from app.models.task import TaskStatus, TaskPriority
-
-if TYPE_CHECKING:
-    from app.schemas.comment import CommentRead
-    from app.schemas.label import LabelRead
 
 class TaskBase(BaseModel):
     title: str = Field(min_length=1, max_length=200)
@@ -30,12 +26,15 @@ class TaskRead(TaskBase):
     created_at: datetime
     updated_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
+
+# Import after base schemas to avoid circular imports
+from app.schemas.comment import CommentRead
+from app.schemas.label import LabelRead
 
 class TaskReadWithRelations(TaskRead):
-    comments: List["CommentRead"] = []
-    labels: List["LabelRead"] = []
+    comments: List[CommentRead] = []
+    labels: List[LabelRead] = []
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
