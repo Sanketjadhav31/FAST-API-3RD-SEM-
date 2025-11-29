@@ -289,14 +289,29 @@ Use the "Try it out" feature to test all endpoints directly from your browser.
 
 ## 🚀 Deployment
 
+### Deploy to Render (Recommended)
+
+**Free tier available!** Complete guide: [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md)
+
+**Quick Deploy**:
+1. Push code to GitHub ✓ (already done)
+2. Sign up at [render.com](https://render.com)
+3. Connect your repository
+4. Configure and deploy (2-5 minutes)
+5. Your API is live! 🎉
+
+**Live URL**: `https://your-app-name.onrender.com`
+
 ### Environment Variables
-Create a `.env` file for production:
+Create a `.env` file for local development:
 ```env
 DATABASE_URL=sqlite:///./task_management.db
 # For PostgreSQL: postgresql://user:password@localhost/dbname
+ENVIRONMENT=development
+LOG_LEVEL=INFO
 ```
 
-### Production Deployment
+### Production Deployment (Self-Hosted)
 ```bash
 # Install production dependencies
 pip install -r requirements.txt
@@ -309,6 +324,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```bash
 docker-compose up -d
 ```
+
+For detailed deployment guides, see [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ## 📊 API Performance
 

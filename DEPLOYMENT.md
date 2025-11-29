@@ -102,6 +102,34 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 
 ## 🌐 Cloud Deployment
 
+### Deploy to Render (Recommended - Free Tier Available)
+
+**Complete Step-by-Step Guide**: See `RENDER_DEPLOYMENT.md`
+
+**Quick Steps**:
+```bash
+# 1. Push code to GitHub (already done ✓)
+git push origin main
+
+# 2. Go to https://render.com and sign up
+# 3. Click "New +" → "Web Service"
+# 4. Connect your GitHub repository
+# 5. Configure:
+#    - Build Command: pip install -r requirements.txt
+#    - Start Command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+# 6. Add environment variables (see RENDER_DEPLOYMENT.md)
+# 7. Click "Create Web Service"
+# 8. Wait 2-5 minutes for deployment
+# 9. Your API is live! 🎉
+```
+
+**Features**:
+- ✅ Free tier available (750 hours/month)
+- ✅ Automatic HTTPS
+- ✅ Auto-deploy from GitHub
+- ✅ Free PostgreSQL database
+- ✅ Easy to use dashboard
+
 ### Deploy to Heroku
 
 ```bash

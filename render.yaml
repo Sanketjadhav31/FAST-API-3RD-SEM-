@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: task-management-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: DATABASE_URL
+        value: sqlite:///./task_management.db
+      - key: ALLOWED_ORIGINS
+        value: "*"
+    healthCheckPath: /health
+    autoDeploy: true
