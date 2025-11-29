@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, TYPE_CHECKING
-from datetime import datetime
+from datetime import datetime, timezone
 
 if TYPE_CHECKING:
     from app.models.task import Task
@@ -13,7 +13,7 @@ class ActivityLog(SQLModel, table=True):
     action: str = Field(max_length=50)
     description: str = Field(max_length=500)
     performed_by: str = Field(max_length=100)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
     # Relationships
     task: "Task" = Relationship(back_populates="activity_logs")

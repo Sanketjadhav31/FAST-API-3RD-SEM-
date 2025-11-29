@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 from typing import List
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.database import get_session
 from app.models import Comment, Task, ActivityLog
@@ -76,7 +76,7 @@ def update_comment(comment_id: int, comment_data: CommentUpdate, session: Sessio
         if value is not None:
             setattr(comment, key, value)
     
-    comment.updated_at = datetime.utcnow()
+    comment.updated_at = datetime.now(timezone.utc)
     
     session.add(comment)
     session.commit()

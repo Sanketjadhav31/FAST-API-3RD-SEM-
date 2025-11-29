@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, List, TYPE_CHECKING
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 
 if TYPE_CHECKING:
@@ -27,8 +27,8 @@ class Task(SQLModel, table=True):
     status: TaskStatus = Field(default=TaskStatus.TODO, index=True)
     priority: TaskPriority = Field(default=TaskPriority.MEDIUM, index=True)
     due_date: Optional[datetime] = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
     # Relationships
     comments: List["Comment"] = Relationship(back_populates="task", cascade_delete=True)

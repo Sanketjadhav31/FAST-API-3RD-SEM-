@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlmodel import Session, select
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.database import get_session
 from app.models import Task, TaskLabel, Label, ActivityLog
@@ -57,9 +57,13 @@ def get_tasks(
     status: Optional[str] = Query(None, description="Filter by status"),
     priority: Optional[str] = Query(None, description="Filter by priority"),
     label_id: Optional[int] = Query(None, description="Filter by label ID"),
+    sort_by: Optional[str] = Query("created_at", description="Sort by field (created_at, updated_at, due_date, priority, status, title)"),
+    sort_order: Optional[str] = Query("desc", description="Sort order (asc or desc)"),
+    skip: int = Query(0, ge=0, description="Number of records to skip (pagination)"),
+    limit: int = Query(100, ge=1, le=100, description="Maximum number of records to return"),
     session: Session = Depends(get_session)
 ):
-    """Get all tasks with optional filters"""
+    """Get all tasks with optional filters, sorting, and pagination"""
     query = select(Task)
     
     # Apply filters
@@ -70,6 +74,16 @@ def get_tasks(
     if label_id:
         # Join with task_labels to filter by label
         query = query.join(TaskLabel).where(TaskLabel.label_id == label_id)
+    
+    # Apply sorting
+    sort_field = getattr(Task, sort_by, Task.created_at)
+    if sort_order.lower() == "asc":
+        query = query.order_by(sort_field.asc())
+    else:
+        query = query.order_by(sort_field.desc())
+    
+    # Apply pagination
+    query = query.offset(skip).limit(limit)
     
     tasks = session.exec(query).all()
     return tasks
@@ -114,7 +128,7 @@ def update_task(task_id: int, task_data: TaskUpdate, session: Session = Depends(
                 setattr(task, key, value)
                 changes.append(f"{key}: {old_value} → {value}")
     
-    task.updated_at = datetime.utcnow()
+    task.updated_at = datetime.now(timezone.utc)
     
     # Update labels if provided
     if label_ids is not None:

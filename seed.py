@@ -3,7 +3,7 @@ Seed script to populate the database with sample data
 Run with: python seed.py
 """
 from sqlmodel import Session
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from app.database import engine, create_db_and_tables
 from app.models import Task, Comment, Label, TaskLabel, ActivityLog
 from app.models.task import TaskStatus, TaskPriority
@@ -42,35 +42,35 @@ def seed_database():
                 "description": "Users are unable to login with correct credentials",
                 "status": TaskStatus.IN_PROGRESS,
                 "priority": TaskPriority.HIGH,
-                "due_date": datetime.utcnow() + timedelta(days=2),
+                "due_date": datetime.now(timezone.utc) + timedelta(days=2),
             },
             {
                 "title": "Implement user profile page",
                 "description": "Create a page where users can view and edit their profile information",
                 "status": TaskStatus.TODO,
                 "priority": TaskPriority.MEDIUM,
-                "due_date": datetime.utcnow() + timedelta(days=7),
+                "due_date": datetime.now(timezone.utc) + timedelta(days=7),
             },
             {
                 "title": "Write API documentation",
                 "description": "Document all REST API endpoints with examples",
                 "status": TaskStatus.TODO,
                 "priority": TaskPriority.LOW,
-                "due_date": datetime.utcnow() + timedelta(days=14),
+                "due_date": datetime.now(timezone.utc) + timedelta(days=14),
             },
             {
                 "title": "Optimize database queries",
                 "description": "Improve performance of slow queries in the dashboard",
                 "status": TaskStatus.DONE,
                 "priority": TaskPriority.HIGH,
-                "due_date": datetime.utcnow() - timedelta(days=1),
+                "due_date": datetime.now(timezone.utc) - timedelta(days=1),
             },
             {
                 "title": "Add email notifications",
                 "description": "Send email notifications for task assignments and updates",
                 "status": TaskStatus.TODO,
                 "priority": TaskPriority.MEDIUM,
-                "due_date": datetime.utcnow() + timedelta(days=10),
+                "due_date": datetime.now(timezone.utc) + timedelta(days=10),
             },
         ]
         

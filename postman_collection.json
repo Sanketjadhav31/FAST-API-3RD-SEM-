@@ -1,0 +1,195 @@
+{
+  "info": {
+    "name": "Task Management API",
+    "description": "Complete API collection for Task Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Implement user authentication\",\n  \"description\": \"Add JWT-based authentication\",\n  \"status\": \"todo\",\n  \"priority\": \"high\",\n  \"label_ids\": [1, 2]\n}"
+            },
+            "url": {"raw": "http://localhost:8000/tasks", "host": ["localhost"], "port": "8000", "path": ["tasks"]}
+          }
+        },
+        {
+          "name": "Get All Tasks",
+          "request": {
+            "method": "GET",
+            "url": {"raw": "http://localhost:8000/tasks", "host": ["localhost"], "port": "8000", "path": ["tasks"]}
+          }
+        },
+        {
+          "name": "Get Tasks with Filters",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8000/tasks?status=in_progress&priority=high&sort_by=created_at&sort_order=desc",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["tasks"],
+              "query": [
+                {"key": "status", "value": "in_progress"},
+                {"key": "priority", "value": "high"},
+                {"key": "sort_by", "value": "created_at"},
+                {"key": "sort_order", "value": "desc"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Single Task",
+          "request": {
+            "method": "GET",
+            "url": {"raw": "http://localhost:8000/tasks/1", "host": ["localhost"], "port": "8000", "path": ["tasks", "1"]}
+          }
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PATCH",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"done\",\n  \"priority\": \"low\"\n}"
+            },
+            "url": {"raw": "http://localhost:8000/tasks/1", "host": ["localhost"], "port": "8000", "path": ["tasks", "1"]}
+          }
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "url": {"raw": "http://localhost:8000/tasks/1", "host": ["localhost"], "port": "8000", "path": ["tasks", "1"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Create Comment",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Started working on this task\",\n  \"author\": \"John Doe\",\n  \"task_id\": 1\n}"
+            },
+            "url": {"raw": "http://localhost:8000/comments", "host": ["localhost"], "port": "8000", "path": ["comments"]}
+          }
+        },
+        {
+          "name": "Get All Comments",
+          "request": {
+            "method": "GET",
+            "url": {"raw": "http://localhost:8000/comments", "host": ["localhost"], "port": "8000", "path": ["comments"]}
+          }
+        },
+        {
+          "name": "Get Comments by Task",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8000/comments?task_id=1",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["comments"],
+              "query": [{"key": "task_id", "value": "1"}]
+            }
+          }
+        },
+        {
+          "name": "Update Comment",
+          "request": {
+            "method": "PATCH",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Updated comment content\"\n}"
+            },
+            "url": {"raw": "http://localhost:8000/comments/1", "host": ["localhost"], "port": "8000", "path": ["comments", "1"]}
+          }
+        },
+        {
+          "name": "Delete Comment",
+          "request": {
+            "method": "DELETE",
+            "url": {"raw": "http://localhost:8000/comments/1", "host": ["localhost"], "port": "8000", "path": ["comments", "1"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Labels",
+      "item": [
+        {
+          "name": "Create Label",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bug\",\n  \"color\": \"#FF0000\"\n}"
+            },
+            "url": {"raw": "http://localhost:8000/labels", "host": ["localhost"], "port": "8000", "path": ["labels"]}
+          }
+        },
+        {
+          "name": "Get All Labels",
+          "request": {
+            "method": "GET",
+            "url": {"raw": "http://localhost:8000/labels", "host": ["localhost"], "port": "8000", "path": ["labels"]}
+          }
+        },
+        {
+          "name": "Update Label",
+          "request": {
+            "method": "PATCH",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"color\": \"#00FF00\"\n}"
+            },
+            "url": {"raw": "http://localhost:8000/labels/1", "host": ["localhost"], "port": "8000", "path": ["labels", "1"]}
+          }
+        },
+        {
+          "name": "Delete Label",
+          "request": {
+            "method": "DELETE",
+            "url": {"raw": "http://localhost:8000/labels/1", "host": ["localhost"], "port": "8000", "path": ["labels", "1"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activity Logs",
+      "item": [
+        {
+          "name": "Get All Activity Logs",
+          "request": {
+            "method": "GET",
+            "url": {"raw": "http://localhost:8000/activity-logs", "host": ["localhost"], "port": "8000", "path": ["activity-logs"]}
+          }
+        },
+        {
+          "name": "Get Activity Logs by Task",
+          "request": {
+            "method": "GET",
+            "url": {"raw": "http://localhost:8000/activity-logs/task/1", "host": ["localhost"], "port": "8000", "path": ["activity-logs", "task", "1"]}
+          }
+        }
+      ]
+    }
+  ]
+}
