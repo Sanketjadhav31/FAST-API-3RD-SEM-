@@ -13,6 +13,8 @@ ENV/
 # Database
 *.db
 task_management.db
+*.sqlite
+*.sqlite3
 
 # IDE
 .vscode/
