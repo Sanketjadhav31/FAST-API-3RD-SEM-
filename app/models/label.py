@@ -12,7 +12,7 @@ class Label(SQLModel, table=True):
     color: str = Field(default="#808080", max_length=7)
     
     # Relationships
-    task_labels: List["TaskLabel"] = Relationship(back_populates="label", cascade_delete=True)
+    task_labels: List["TaskLabel"] = Relationship(back_populates="label")
 
 class TaskLabel(SQLModel, table=True):
     __tablename__ = "task_labels"

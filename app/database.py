@@ -1,14 +1,24 @@
 from sqlmodel import SQLModel, create_engine, Session
 from typing import Generator
+import os
 
-# Database URL - SQLite for development
-DATABASE_URL = "sqlite:///./task_management.db"
+# Get database URL from environment variable or use SQLite as fallback
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./task_management.db")
 
-# Create engine
+# Fix for Render PostgreSQL URL (uses postgres:// instead of postgresql://)
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+# Create engine with appropriate settings
+connect_args = {}
+if DATABASE_URL.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}  # Only for SQLite
+
 engine = create_engine(
     DATABASE_URL,
-    echo=True,  # Set to False in production
-    connect_args={"check_same_thread": False}  # Needed for SQLite
+    echo=False,  # Set to False in production for better performance
+    connect_args=connect_args,
+    pool_pre_ping=True  # Verify connections before using them
 )
 
 def create_db_and_tables():

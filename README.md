@@ -302,6 +302,15 @@ Use the "Try it out" feature to test all endpoints directly from your browser.
 
 **Live URL**: `https://your-app-name.onrender.com`
 
+### Setup PostgreSQL (Recommended for Production)
+
+**Quick Guide**: [QUICK_POSTGRESQL.md](QUICK_POSTGRESQL.md) - 3 steps, 5 minutes
+
+1. Create PostgreSQL database on Render (Free)
+2. Copy Internal Database URL
+3. Update DATABASE_URL in your web service
+4. Auto-redeploys with PostgreSQL! ✅
+
 ### Environment Variables
 Create a `.env` file for local development:
 ```env
