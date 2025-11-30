@@ -5,7 +5,6 @@ from sqlmodel.pool import StaticPool
 
 from app.main import app
 from app.database import get_session
-from app.models import Task, Comment, Label, TaskLabel, ActivityLog
 
 @pytest.fixture(name="session")
 def session_fixture():

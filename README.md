@@ -105,9 +105,21 @@ docker run -p 8000:8000 task-api
 
 ## 📚 API Documentation
 
-Once the server is running:
+### Live API
+- **Production**: https://task-management-api-q19j.onrender.com
+- **Swagger UI**: https://task-management-api-q19j.onrender.com/docs
+- **ReDoc**: https://task-management-api-q19j.onrender.com/redoc
+
+### Local Development
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
+
+### Testing Guide
+📖 **Complete API Testing Guide**: [API_TESTING.md](API_TESTING.md)
+- All endpoints with examples
+- cURL commands ready to copy
+- Swagger UI instructions
+- Error handling tests
 
 ## 🎯 API Endpoints
 
