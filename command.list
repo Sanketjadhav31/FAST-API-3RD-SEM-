@@ -1,0 +1,65 @@
+"C:\Program Files\PostgreSQL\18\bin\psql.exe" "postgresql://task_management_faxe_user:RLwpRQuwDvVdU3ibM9VYBAtiqLJw4sxg@dpg-d4lk29hr0fns73fcncj0-a.oregon-postgres.render.com:5432/task_management_faxe"
+
+✅ 🔥 CONNECTION COMMAND
+"C:\Program Files\PostgreSQL\18\bin\psql.exe" "postgresql://task_management_faxe_user:RLwpRQuwDvVdU3ibM9VYBAtiqLJw4sxg@dpg-d4lk29hr0fns73fcncj0-a.oregon-postgres.render.com:5432/task_management_faxe"
+
+✅ 🔥 BASIC COMMANDS
+Show all tables
+\dt
+
+See all schemas
+\dn
+
+Describe a table (see columns)
+\d table_name
+
+Show all databases
+\l
+
+Exit PostgreSQL
+\q
+
+✅ 🔥 DATA COMMANDS (MOST USEFUL)
+See all data in a table
+SELECT * FROM table_name;
+
+Insert data
+INSERT INTO table_name (col1, col2, col3)
+VALUES ('value1', 'value2', 'value3');
+
+Update data
+UPDATE table_name
+SET column = 'new_value'
+WHERE id = 1;
+
+Delete a row
+DELETE FROM table_name
+WHERE id = 1;
+
+Count rows
+SELECT COUNT(*) FROM table_name;
+
+✅ 🔥 TABLE COMMANDS
+Create a table
+CREATE TABLE table_name (
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    age INT
+);
+
+Delete a table
+DROP TABLE table_name;
+
+✅ 🔥 FILTERING (SQL Queries)
+Select specific columns
+SELECT name, email FROM users;
+
+Filter rows
+SELECT * FROM users WHERE age > 18;
+
+Order by
+SELECT * FROM tasks ORDER BY created_at DESC;
+
+Limit results
+SELECT * FROM tasks LIMIT 10;
+
