@@ -31,6 +31,15 @@ class Task(SQLModel, table=True):
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
     # Relationships
-    comments: List["Comment"] = Relationship(back_populates="task")
-    task_labels: List["TaskLabel"] = Relationship(back_populates="task")
-    activity_logs: List["ActivityLog"] = Relationship(back_populates="task")
+    comments: List["Comment"] = Relationship(
+        back_populates="task",
+        sa_relationship_kwargs={"cascade": "all, delete-orphan"}
+    )
+    task_labels: List["TaskLabel"] = Relationship(
+        back_populates="task",
+        sa_relationship_kwargs={"cascade": "all, delete-orphan"}
+    )
+    activity_logs: List["ActivityLog"] = Relationship(
+        back_populates="task",
+        sa_relationship_kwargs={"cascade": "all, delete-orphan"}
+    )

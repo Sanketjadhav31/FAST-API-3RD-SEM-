@@ -1,4 +1,4 @@
-from sqlmodel import SQLModel, Field, Relationship
+from sqlmodel import SQLModel, Field, Relationship, Column, Integer, ForeignKey
 from typing import Optional, TYPE_CHECKING
 from datetime import datetime, timezone
 
@@ -9,7 +9,13 @@ class ActivityLog(SQLModel, table=True):
     __tablename__ = "activity_logs"
     
     id: Optional[int] = Field(default=None, primary_key=True)
-    task_id: int = Field(foreign_key="tasks.id", index=True)
+    task_id: int = Field(
+        sa_column=Column(
+            Integer,
+            ForeignKey("tasks.id", ondelete="CASCADE"),
+            index=True
+        )
+    )
     action: str = Field(max_length=50)
     description: str = Field(max_length=500)
     performed_by: str = Field(max_length=100)
